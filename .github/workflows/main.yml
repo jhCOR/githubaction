@@ -31,5 +31,6 @@ jobs:
             sudo npm
             sudo npm build
             sudo npm ci
+            monogd
             npm start
           
