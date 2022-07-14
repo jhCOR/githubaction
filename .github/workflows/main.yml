@@ -23,7 +23,7 @@ jobs:
         with:
           host: 3.34.40.210
           username: root
-          key: kc2yuDo02a97joLzc1iG
+          key: EuKKgJprvPv0s68ONs2N6y
           port: 59874
           script: |
             cd /gitaction
