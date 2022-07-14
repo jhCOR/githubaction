@@ -23,10 +23,10 @@ jobs:
         with:
           host: 3.34.40.210
           username: root
-          password: EuKKgJprvPv0s68ONs2N6y
+          password: lHRGU1gNXyfy8JdyW
           port: 59874
           script: |
-            cd /gitaction
+            cd /workspace/gitaction
             sudo git pull
             sudo npm
             sudo npm build
