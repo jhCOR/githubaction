@@ -22,7 +22,7 @@ jobs:
         uses: appleboy/ssh-action@master
         with:
           host: 3.34.40.210
-          username: root
+          username: ubuntu
           key: 'kc2yuDo02a97joLzc1iG'
           port: 59874
           script: |
