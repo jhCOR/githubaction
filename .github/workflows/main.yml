@@ -1,0 +1,62 @@
+
+# This is a basic workflow to help you get started with Actions
+
+name: CD
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the "main" branch
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy
+        uses: appleboy/ssh-action@master
+        with:
+          host: 3.34.40.210
+          port: 50549
+          password: ${{ secrets.PASSWORD }}
+          script: |
+            cd gitaction
+
+      - name: send custom message with args
+        uses: appleboy/telegram-action@master
+  build:
+    runs-on: ubuntu-16.04
+
+    # Nodejs 런타임 정보 설정
+    strategy:
+      matrix:
+        node-version: [14.x]
+        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: "npm"
+
+      # 모듈 설치
+      - name: Install modules
+        run: npm ci
+      # 빌드
+      - name: Build project
+        run: npm run build
+      # 배포 
+      - name: Deploy build outputs
+        uses: appleboy/scp-action@master
+        with:
+          host: 3.34.40.210
+          password: ${{ secrets.PASSWORD }}
+          key: ${{ secrets.SSH_PEM_KEY }}
+          port: 50549
