@@ -22,7 +22,7 @@ jobs:
         uses: appleboy/ssh-action@master
         with:
           host: 3.34.40.210
-          port: 50549
+          port: 59874
           password: ${{ secrets.PASSWORD }}
           script: |
             cd gitaction
