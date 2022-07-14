@@ -21,7 +21,8 @@ jobs:
       - name: Deploy
         uses: appleboy/ssh-action@master
         with:
-          host: root@3.34.40.210
+          host: 3.34.40.210
+          name: root
           port: 59874
           password: ${{ secrets.PASSWORD }}
           script: |
