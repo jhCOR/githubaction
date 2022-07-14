@@ -23,7 +23,7 @@ jobs:
         with:
           host: 3.34.40.210
           username: root
-          key: ${{ secrets.PASSWORD }}
+          key: WB8xJe7ehP2Zd2eIf
           port: 59874
           script: |
             cd /gitaction
