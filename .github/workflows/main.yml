@@ -58,5 +58,4 @@ jobs:
         with:
           host: 3.34.40.210
           password: ${{ secrets.PASSWORD }}
-          key: ${{ secrets.SSH_PEM_KEY }}
-          port: 50549
+          port: 59874
