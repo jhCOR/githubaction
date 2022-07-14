@@ -30,5 +30,6 @@ jobs:
             sudo git pull
             sudo npm
             sudo npm build
+            sudo npm ci
             npm start
           
