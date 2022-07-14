@@ -15,34 +15,22 @@ on:
   workflow_dispatch:
 
 jobs:
-  
-  build:
-    runs-on: ubuntu-16.04
-
-    # Nodejs 런타임 정보 설정
-    strategy:
-      matrix:
-        node-version: [14.x]
-        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
-
+  deploy:
+    runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v3
-        with:
-          node-version: ${{ matrix.node-version }}
-          cache: "npm"
-
-      # 모듈 설치
-      - name: Install modules
-        run: npm ci
-      # 빌드
-      - name: Build project
-        run: npm run build
-      # 배포 
-      - name: Deploy build outputs
-        uses: appleboy/scp-action@master
+      - name: Deploy
+        uses: appleboy/ssh-action@master
         with:
           host: root@3.34.40.210
-          password: ${{ secrets.PASSWORD }}
           port: 59874
+          password: ${{ secrets.PASSWORD }}
+          script: |
+            cd gitaction
+      - name: Build project
+        run: npm ci
+      - name: Build project
+        run: npm start
+      - name: send custom message with args
+        uses: appleboy/telegram-action@master
+
+          
