@@ -22,16 +22,13 @@ jobs:
         uses: appleboy/ssh-action@master
         with:
           host: 3.34.40.210
-          name: root
+          username: root
+          key: ${{ secrets.PASSWORD }}
           port: 59874
-          password: ${{ secrets.PASSWORD }}
           script: |
-            cd gitaction
-      - name: Build project
-        run: npm ci
-      - name: Build project
-        run: npm start
-      - name: send custom message with args
-        uses: appleboy/telegram-action@master
-
+            cd /gitaction
+            sudo git pull
+            sudo npm
+            sudo npm build
+            npm start
           
